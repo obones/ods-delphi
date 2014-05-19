@@ -10,7 +10,7 @@
 { ANY KIND, either express or implied. See the License for the specific language governing rights  }
 { and limitations under the License.                                                               }
 {                                                                                                  }
-{ The Original Code is Registration.pas.                                                           }
+{ The Original Code is ods.Treap.Tests.pas.                                                        }
 {                                                                                                  }
 { The Initial Developer of the Original Code is Olivier Sannier (obones).                          }
 { All Rights Reserved.                                                                             }
@@ -18,28 +18,37 @@
 { Contributors:                                                                                    }
 {                                                                                                  }
 {**************************************************************************************************}
-unit Registration;
+unit ods.Treap.Tests;
 
 interface
 
+uses
+  ods.BinarySearchTree.Tests, ods.Treap;
+
+type
+  TTreapTest<T; N: TTreapNode<T>, constructor; TTree: TTreap<T, N>, constructor> = class(TBinarySearchTreeTest<T, N, TTree>)
+  end;
+
+  TIntegerTreapTest = class(TBinarySearchTreeTest<Integer, TTreapNode<Integer>, TTreap<Integer, TTreapNode<Integer>>>)
+  protected
+    function GetAddValue: Integer; override;
+    procedure DoTestAddChecks(Value: Integer); override;
+  end;
+
 implementation
 
-uses
-  TestFramework,
-  ods.BinaryTree.Tests,
-  ods.BinarySearchTree.Tests,
-  ods.RedBlackTree.Tests,
-  ods.Treap.Tests;
+{ TIntegerTreapTest }
 
-procedure RegisterTests;
+procedure TIntegerTreapTest.DoTestAddChecks(Value: Integer);
 begin
-  RegisterTest(TBinaryTreeTest.Suite);
-  RegisterTest(TIntegerBinarySearchTreeTest.Suite);
-  RegisterTest(TIntegerRedBlackTreeTest.Suite);
-  RegisterTest(TIntegerTreapTest.Suite);
+  inherited DoTestAddChecks(Value);
+
+  CheckEquals(74, FTree.Find(Value), 'Value should be there');
 end;
 
-initialization
-  RegisterTests;
+function TIntegerTreapTest.GetAddValue: Integer;
+begin
+  Result := 74;
+end;
 
 end.

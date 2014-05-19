@@ -13,7 +13,9 @@ uses
   ods.BinarySearchTree in '..\sources\ods.BinarySearchTree.pas',
   ods.BinarySearchTree.Tests in 'ods.BinarySearchTree.Tests.pas',
   ods.RedBlackTree in '..\sources\ods.RedBlackTree.pas',
-  ods.RedBlackTree.Tests in 'ods.RedBlackTree.Tests.pas';
+  ods.RedBlackTree.Tests in 'ods.RedBlackTree.Tests.pas',
+  ods.Treap.Tests in 'ods.Treap.Tests.pas',
+  ods.Treap in '..\sources\ods.Treap.pas';
 
 {$R *.RES}
 
