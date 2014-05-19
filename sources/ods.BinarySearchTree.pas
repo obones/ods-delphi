@@ -45,14 +45,14 @@ type
     procedure remove(u: TNode); overload; virtual;
     procedure rotateRight(u: TNode); virtual;
     procedure rotateLeft(u: TNode); virtual;
-    function add(u: TNode): Boolean; overload; virtual;
+    function addNode(u: TNode): Boolean; virtual;
 
     function compare(A, B: T): Integer; virtual; abstract;
   public
     constructor Create;
     destructor Destroy; override;
 
-    function Add(x: T): Boolean; overload; virtual;
+    function Add(x: T): Boolean; virtual;
     function Remove(x: T): Boolean; overload; virtual;
     function Find(x: T): T; virtual;
     function FindEQ(x: T): T; virtual;
@@ -76,7 +76,7 @@ begin
 	Result := addChild(p, u);
 end;
 
-function TBinarySearchTree<T, TNode>.add(u: TNode): Boolean;
+function TBinarySearchTree<T, TNode>.addNode(u: TNode): Boolean;
 var
   p: TNode;
 begin
