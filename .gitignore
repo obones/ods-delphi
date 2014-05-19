@@ -50,3 +50,7 @@
 # Delphi history and backups
 __history/
 *.~*
+dcu
+/tests/bin
+/tests/ODSTests.res
+/sources/*.bak
