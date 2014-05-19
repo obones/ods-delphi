@@ -115,6 +115,7 @@
 			<DCCReference Include="..\sources\ods.Treap.pas"/>
 			<DCCReference Include="ods.ScapegoatTree.Tests.pas"/>
 			<DCCReference Include="..\sources\ods.ScapegoatTree.pas"/>
+			<DCCReference Include="PerformanceTests.pas"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

@@ -30,7 +30,8 @@ uses
   ods.BinarySearchTree.Tests,
   ods.RedBlackTree.Tests,
   ods.Treap.Tests,
-  ods.ScapegoatTree.Tests;
+  ods.ScapegoatTree.Tests,
+  PerformanceTests;
 
 procedure RegisterTests;
 begin
@@ -39,6 +40,7 @@ begin
   RegisterTest(TIntegerRedBlackTreeTest.Suite);
   RegisterTest(TIntegerTreapTest.Suite);
   RegisterTest(TIntegerScapegoatTreeTest.Suite);
+  RegisterTest(TTestSuite.Create('Performances', [TTreesPerformanceTest.Suite]));
 end;
 
 initialization
