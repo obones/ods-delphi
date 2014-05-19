@@ -34,21 +34,21 @@ type
   protected
     r: TNode;    // root TNode
 
-    function NodeSize(u: TNode): Integer; virtual;
-    function NodeHeight(u: TNode): Integer; virtual;
-    procedure TraverseNode(u: TNode); virtual;
+    function NodeSize(u: TNode): Integer;
+    function NodeHeight(u: TNode): Integer;
+    procedure TraverseNode(u: TNode);
   public
     constructor Create;
     destructor Destroy; override;
 
     procedure Clear; virtual;
-    function Depth(u: TNode): Integer; virtual;
+    function Depth(u: TNode): Integer;
     function Size: Integer; virtual;
-    function Size2: Integer; virtual;
-    function Height: Integer; virtual;
-    procedure Traverse; virtual;
-    procedure Traverse2; virtual;
-    procedure BfTraverse; virtual;
+    function Size2: Integer;
+    function Height: Integer;
+    procedure Traverse;
+    procedure Traverse2;
+    procedure BfTraverse;
   end;
 
 implementation

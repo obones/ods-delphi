@@ -41,13 +41,13 @@ type
     n: Integer;
     FComparer: IComparer<T>;
 
-    function findLast(x: T): TNode; virtual;
-    function addChild(p: TNode; u: TNode): Boolean; virtual;
-    procedure splice(u: TNode); virtual;
-    procedure removeNode(u: TNode); virtual;
-    procedure rotateRight(u: TNode); virtual;
-    procedure rotateLeft(u: TNode); virtual;
-    function addNode(u: TNode): Boolean; virtual;
+    function findLast(x: T): TNode;
+    function addChild(p: TNode; u: TNode): Boolean;
+    procedure splice(u: TNode);
+    procedure removeNode(u: TNode);
+    procedure rotateRight(u: TNode);
+    procedure rotateLeft(u: TNode);
+    function addNode(u: TNode): Boolean;
 
     function compare(A, B: T): Integer; virtual;
   public
@@ -57,8 +57,8 @@ type
 
     function Add(x: T): Boolean; virtual;
     function Remove(x: T): Boolean; virtual;
-    function Find(x: T): T; virtual;
-    function FindEQ(x: T): T; virtual;
+    function Find(x: T): T;
+    function FindEQ(x: T): T;
     function Size: Integer; override;
     procedure Clear; override;
   end;
