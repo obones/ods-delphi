@@ -34,19 +34,19 @@ type
   protected
     r: TNode;    // root TNode
 
-    function NodeSize(u: TNode): Integer; overload; virtual;
-    function Height(u: TNode): Integer; overload; virtual;
-    procedure Traverse(u: TNode); overload; virtual;
+    function NodeSize(u: TNode): Integer; virtual;
+    function NodeHeight(u: TNode): Integer; virtual;
+    procedure TraverseNode(u: TNode); virtual;
   public
     constructor Create;
     destructor Destroy; override;
 
     procedure Clear; virtual;
     function Depth(u: TNode): Integer; virtual;
-    function Size: Integer; overload; virtual;
+    function Size: Integer; virtual;
     function Size2: Integer; virtual;
-    function Height: Integer; overload; virtual;
-    procedure Traverse; overload; virtual;
+    function Height: Integer; virtual;
+    procedure Traverse; virtual;
     procedure Traverse2; virtual;
     procedure BfTraverse; virtual;
   end;
@@ -142,15 +142,15 @@ end;
 
 function TBinaryTree<TNode>.Height: Integer;
 begin
-  Result := height(r);
+  Result := NodeHeight(r);
 end;
 
-function TBinaryTree<TNode>.Height(u: TNode): Integer;
+function TBinaryTree<TNode>.NodeHeight(u: TNode): Integer;
 begin
   if u = nil then
     Result := -1
   else
-    Result := 1 + max(height(u.left), height(u.right));
+    Result := 1 + max(NodeHeight(u.left), NodeHeight(u.right));
 end;
 
 function TBinaryTree<TNode>.NodeSize(u: TNode): Integer;
@@ -207,16 +207,16 @@ end;
 
 procedure TBinaryTree<TNode>.Traverse;
 begin
-  traverse(r);
+  TraverseNode(r);
 end;
 
-procedure TBinaryTree<TNode>.Traverse(u: TNode);
+procedure TBinaryTree<TNode>.TraverseNode(u: TNode);
 begin
   if u = nil then
     Exit;
 
-  traverse(u.left);
-  traverse(u.right);
+  TraverseNode(u.left);
+  TraverseNode(u.right);
 end;
 
 procedure TBinaryTree<TNode>.Traverse2;

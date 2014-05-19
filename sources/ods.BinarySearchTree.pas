@@ -44,7 +44,7 @@ type
     function findLast(x: T): TNode; virtual;
     function addChild(p: TNode; u: TNode): Boolean; virtual;
     procedure splice(u: TNode); virtual;
-    procedure remove(u: TNode); overload; virtual;
+    procedure removeNode(u: TNode); virtual;
     procedure rotateRight(u: TNode); virtual;
     procedure rotateLeft(u: TNode); virtual;
     function addNode(u: TNode): Boolean; virtual;
@@ -56,7 +56,7 @@ type
     destructor Destroy; override;
 
     function Add(x: T): Boolean; virtual;
-    function Remove(x: T): Boolean; overload; virtual;
+    function Remove(x: T): Boolean; virtual;
     function Find(x: T): T; virtual;
     function FindEQ(x: T): T; virtual;
     function Size: Integer; override;
@@ -232,13 +232,13 @@ begin
   u := findLast(x);
   if (u <> nil) and (compare(x, u.x) = 0) then
   begin
-    remove(u);
+    removeNode(u);
     Exit(True);
   end;
   Result := False;
 end;
 
-procedure TBinarySearchTree<T, TNode>.remove(u: TNode);
+procedure TBinarySearchTree<T, TNode>.removeNode(u: TNode);
 var
   w: TNode;
 begin
