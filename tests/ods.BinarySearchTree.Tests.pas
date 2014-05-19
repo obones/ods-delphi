@@ -27,12 +27,59 @@ uses
 
 type
   TBinarySearchTreeTest<T; N: TBSTNode<T>, constructor; TTree: TBinarySearchTree<T, N>, constructor> = class(TBinaryTreeTest<N, TTree>)
+  protected
+    function GetAddValue: T; virtual;
+    procedure DoTestAddChecks(Value: T); virtual;
   published
+    procedure TestAdd;
   end;
 
   TIntegerBinarySearchTreeTest = class(TBinarySearchTreeTest<Integer, TBSTNode<Integer>, TBinarySearchTree<Integer, TBSTNode<Integer>>>)
+  protected
+    function GetAddValue: Integer; override;
+    procedure DoTestAddChecks(Value: Integer); override;
   end;
 
 implementation
+
+uses
+  System.SysUtils;
+
+{ TBinarySearchTreeTest<T, N, TTree> }
+
+procedure TBinarySearchTreeTest<T, N, TTree>.DoTestAddChecks(Value: T);
+begin
+  CheckEquals(1, FTree.Size, 'Size should increase once add done');
+end;
+
+function TBinarySearchTreeTest<T, N, TTree>.GetAddValue: T;
+begin
+  raise EAbstractError.Create('GetAddValue is not implemented');
+end;
+
+procedure TBinarySearchTreeTest<T, N, TTree>.TestAdd;
+var
+  Value: T;
+begin
+  Value := GetAddValue;
+
+  FTree.Add(Value);
+
+  DoTestAddChecks(Value);
+end;
+
+{ TIntegerBinarySearchTreeTest }
+
+procedure TIntegerBinarySearchTreeTest.DoTestAddChecks(Value: Integer);
+begin
+  inherited DoTestAddChecks(Value);
+
+  CheckEquals(45, FTree.Find(Value), 'Value should be there');
+end;
+
+function TIntegerBinarySearchTreeTest.GetAddValue: Integer;
+begin
+  Result := 45;
+end;
 
 end.
