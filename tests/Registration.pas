@@ -27,12 +27,14 @@ implementation
 uses
   TestFramework,
   ods.BinaryTree.Tests,
-  ods.BinarySearchTree.Tests;
+  ods.BinarySearchTree.Tests,
+  ods.RedBlackTree.Tests;
 
 procedure RegisterTests;
 begin
   RegisterTest(TBinaryTreeTest.Suite);
   RegisterTest(TIntegerBinarySearchTreeTest.Suite);
+  RegisterTest(TIntegerRedBlackTreeTest.Suite);
 end;
 
 initialization

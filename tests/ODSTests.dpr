@@ -11,7 +11,9 @@ uses
   Registration in 'Registration.pas',
   ods.ArrayDeque in '..\sources\ods.ArrayDeque.pas',
   ods.BinarySearchTree in '..\sources\ods.BinarySearchTree.pas',
-  ods.BinarySearchTree.Tests in 'ods.BinarySearchTree.Tests.pas';
+  ods.BinarySearchTree.Tests in 'ods.BinarySearchTree.Tests.pas',
+  ods.RedBlackTree in '..\sources\ods.RedBlackTree.pas',
+  ods.RedBlackTree.Tests in 'ods.RedBlackTree.Tests.pas';
 
 {$R *.RES}
 

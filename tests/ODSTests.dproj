@@ -109,6 +109,8 @@
 			<DCCReference Include="..\sources\ods.ArrayDeque.pas"/>
 			<DCCReference Include="..\sources\ods.BinarySearchTree.pas"/>
 			<DCCReference Include="ods.BinarySearchTree.Tests.pas"/>
+			<DCCReference Include="..\sources\ods.RedBlackTree.pas"/>
+			<DCCReference Include="ods.RedBlackTree.Tests.pas"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
