@@ -64,7 +64,6 @@ var
 	q: TArrayDeque<TNode>;
   u: TNode;
 begin
-
 	if r <> nil then
     q.add(q.size, r);
 
@@ -92,22 +91,22 @@ begin
 		if prev = TNode(u.parent) then
     begin
 			if u.left <> nil then
-        next := u.left
+        next := TNode(u.left)
 			else if u.right <> nil then
-         next := u.right
+         next := TNode(u.right)
 			else
-        next := u.parent;
+        next := TNode(u.parent);
 		end
     else if prev = TNode(u.left) then
     begin
 			if u.right <> nil then
-        next := u.right
+        next := TNode(u.right)
 			else
-        next := u.parent;
+        next := TNode(u.parent);
 		end
     else
     begin
-			next := u.parent;
+			next := TNode(u.parent);
     end;
 
 		prev := u;
@@ -129,7 +128,7 @@ begin
 	Result := 0;
 	while u <> r do
   begin
-		u := u.parent;
+		u := TNode(u.parent);
 		Inc(Result);
 	end;
 end;
@@ -183,22 +182,22 @@ begin
     begin
       Inc(Result);
       if u.left <> nil then
-        next := u.left
+        next := TNode(u.left)
       else if u.right <> nil then
-        next := u.right
+        next := TNode(u.right)
       else
-        next := u.parent;
+        next := TNode(u.parent);
     end
     else if prev = TNode(u.left) then
     begin
       if u.right <> nil then
-        next := u.right
+        next := TNode(u.right)
       else
-        next := u.parent;
+        next := TNode(u.parent);
     end
     else
     begin
-      next := u.parent;
+      next := TNode(u.parent);
     end;
 
     prev := u;
@@ -234,22 +233,22 @@ begin
 		if prev = TNode(u.parent) then
     begin
 			if u.left <> nil then
-        next := u.left
+        next := TNode(u.left)
 			else if u.right <> nil then
-        next := u.right
+        next := TNode(u.right)
 			else
-        next := u.parent;
+        next := TNode(u.parent);
     end
 		else if prev = TNode(u.left) then
     begin
 			if u.right <> nil then
-        next := u.right
+        next := TNode(u.right)
 			else
-        next := u.parent;
+        next := TNode(u.parent);
     end
 		else
     begin
-			next := u.parent;
+			next := TNode(u.parent);
 		end;
 
 		prev := u;
