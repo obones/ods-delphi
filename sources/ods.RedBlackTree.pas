@@ -88,7 +88,7 @@ begin
     end;
 
     w := TNode(u.parent);
-    if TNode(w.left).colour = black then
+    if (w.left = nil) or (TNode(w.left).colour = black) then
     begin // ensure left-leaning
       flipLeft(w);
       u := w;
@@ -97,7 +97,7 @@ begin
     if w.colour = black then
       Exit; // no red-red edge := done
     g := TNode(w.parent); // grandparent of u
-    if TNode(g.right).colour = black then
+    if (g.right = nil) or (TNode(g.right).colour = black) then
     begin
       flipRight(g);
       Exit;
