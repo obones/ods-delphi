@@ -67,7 +67,7 @@ end;
 
 procedure TBinaryTreeTest<N, T>.TestSize;
 begin
-  CheckEquals(0, FTree.Size(nil), 'Size should be 0 at first');
+  CheckEquals(0, FTree.Size, 'Size should be 0 at first');
 end;
 
 end.

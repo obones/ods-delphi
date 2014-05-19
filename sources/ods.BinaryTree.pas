@@ -34,7 +34,7 @@ type
   protected
     r: TNode;    // root TNode
 
-    function Size(u: TNode): Integer; overload; virtual;
+    function NodeSize(u: TNode): Integer; overload; virtual;
     function Height(u: TNode): Integer; overload; virtual;
     procedure Traverse(u: TNode); overload; virtual;
   public
@@ -153,17 +153,17 @@ begin
     Result := 1 + max(height(u.left), height(u.right));
 end;
 
-function TBinaryTree<TNode>.Size(u: TNode): Integer;
+function TBinaryTree<TNode>.NodeSize(u: TNode): Integer;
 begin
 	if u = nil then
     Result := 0
 	else
-    Result := 1 + size(u.left) + size(u.right);
+    Result := 1 + NodeSize(u.left) + NodeSize(u.right);
 end;
 
 function TBinaryTree<TNode>.Size: Integer;
 begin
-	Result := size(r);
+	Result := NodeSize(r);
 end;
 
 function TBinaryTree<TNode>.Size2: Integer;
