@@ -61,20 +61,20 @@ uses
 
 procedure TBinaryTree<TNode>.BfTraverse;
 var
-	q: TArrayDeque<TNode>;
+  q: TArrayDeque<TNode>;
   u: TNode;
 begin
-	if r <> nil then
+  if r <> nil then
     q.add(q.size, r);
 
-	while q.size > 0 do
+  while q.size > 0 do
   begin
-		u := q.remove(q.size - 1);
-		if u.left <> nil then
+    u := q.remove(q.size - 1);
+    if u.left <> nil then
       q.add(q.size, u.left);
-		if u.right <> nil then
+    if u.right <> nil then
       q.add(q.size, u.right);
-	end
+  end
 end;
 
 procedure TBinaryTree<TNode>.Clear;
@@ -83,71 +83,71 @@ var
   prev: TNode;
   next: TNode;
 begin
-	u := r;
+  u := r;
   prev := nil;
 
-	while u <> nil do
+  while u <> nil do
   begin
-		if prev = TNode(u.parent) then
+    if prev = TNode(u.parent) then
     begin
-			if u.left <> nil then
+      if u.left <> nil then
         next := TNode(u.left)
-			else if u.right <> nil then
+      else if u.right <> nil then
          next := TNode(u.right)
-			else
+      else
         next := TNode(u.parent);
-		end
+    end
     else if prev = TNode(u.left) then
     begin
-			if u.right <> nil then
+      if u.right <> nil then
         next := TNode(u.right)
-			else
+      else
         next := TNode(u.parent);
-		end
+    end
     else
     begin
-			next := TNode(u.parent);
+      next := TNode(u.parent);
     end;
 
-		prev := u;
-		if next = TNode(u.parent) then
-			u.Free;
-		u := next;
+    prev := u;
+    if next = TNode(u.parent) then
+      u.Free;
+    u := next;
   end;
 
-	r := nil;
+  r := nil;
 end;
 
 constructor TBinaryTree<TNode>.Create;
 begin
-	r := nil;
+  r := nil;
 end;
 
 function TBinaryTree<TNode>.Depth(u: TNode): Integer;
 begin
-	Result := 0;
-	while u <> r do
+  Result := 0;
+  while u <> r do
   begin
-		u := TNode(u.parent);
-		Inc(Result);
-	end;
+    u := TNode(u.parent);
+    Inc(Result);
+  end;
 end;
 
 destructor TBinaryTree<TNode>.Destroy;
 begin
-	Clear;
+  Clear;
 
   inherited Destroy;
 end;
 
 function TBinaryTree<TNode>.Height: Integer;
 begin
-	Result := height(r);
+  Result := height(r);
 end;
 
 function TBinaryTree<TNode>.Height(u: TNode): Integer;
 begin
-	if u = nil then
+  if u = nil then
     Result := -1
   else
     Result := 1 + max(height(u.left), height(u.right));
@@ -155,15 +155,15 @@ end;
 
 function TBinaryTree<TNode>.NodeSize(u: TNode): Integer;
 begin
-	if u = nil then
+  if u = nil then
     Result := 0
-	else
+  else
     Result := 1 + NodeSize(u.left) + NodeSize(u.right);
 end;
 
 function TBinaryTree<TNode>.Size: Integer;
 begin
-	Result := NodeSize(r);
+  Result := NodeSize(r);
 end;
 
 function TBinaryTree<TNode>.Size2: Integer;
@@ -207,7 +207,7 @@ end;
 
 procedure TBinaryTree<TNode>.Traverse;
 begin
-	traverse(r);
+  traverse(r);
 end;
 
 procedure TBinaryTree<TNode>.Traverse(u: TNode);
@@ -221,38 +221,38 @@ end;
 
 procedure TBinaryTree<TNode>.Traverse2;
 var
-	u: TNode;
+  u: TNode;
   prev: TNode;
   next: TNode;
 begin
-	u := r;
+  u := r;
   prev := nil;
 
-	while u <> nil do
+  while u <> nil do
   begin
-		if prev = TNode(u.parent) then
+    if prev = TNode(u.parent) then
     begin
-			if u.left <> nil then
+      if u.left <> nil then
         next := TNode(u.left)
-			else if u.right <> nil then
+      else if u.right <> nil then
         next := TNode(u.right)
-			else
+      else
         next := TNode(u.parent);
     end
-		else if prev = TNode(u.left) then
+    else if prev = TNode(u.left) then
     begin
-			if u.right <> nil then
+      if u.right <> nil then
         next := TNode(u.right)
-			else
+      else
         next := TNode(u.parent);
     end
-		else
+    else
     begin
-			next := TNode(u.parent);
-		end;
+      next := TNode(u.parent);
+    end;
 
-		prev := u;
-		u := next;
+    prev := u;
+    u := next;
   end;
 end;
 

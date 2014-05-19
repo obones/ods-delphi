@@ -53,38 +53,38 @@ procedure TArrayDeque<T>.add(i: Integer; x: T);
 var
   k: Integer;
 begin
-	if n + 1 > Length(a) then
+  if n + 1 > Length(a) then
     resize();
-	if i < n div 2 then
+  if i < n div 2 then
   begin // shift a[0],..,a[i-1] left one position
     if j = 0 then
       j := Length(a) - 1
     else
-  		j := j - 1;
+      j := j - 1;
 
-		for k := 0 to i-1 do
-			a[(j+k) mod Length(a)] := a[(j+k+1) mod Length(a)];
-	end
+    for k := 0 to i-1 do
+      a[(j+k) mod Length(a)] := a[(j+k+1) mod Length(a)];
+  end
   else
   begin // shift a[i],..,a[n-1] right one position
-		for k := n downto i + 1 do
-			a[(j+k) mod Length(a)] := a[(j+k-1) mod Length(a)];
-	end;
-	a[(j+i) mod Length(a)] := x;
-	Inc(n);
+    for k := n downto i + 1 do
+      a[(j+k) mod Length(a)] := a[(j+k-1) mod Length(a)];
+  end;
+  a[(j+i) mod Length(a)] := x;
+  Inc(n);
 end;
 
 procedure TArrayDeque<T>.clear;
 begin
-	n := 0;
-	j := 0;
-	SetLength(a, 1);
+  n := 0;
+  j := 0;
+  SetLength(a, 1);
 end;
 
 constructor TArrayDeque<T>.Create;
 begin
-	n := 0;
-	j := 0;
+  n := 0;
+  j := 0;
 
   SetLength(a, 1);
 end;
@@ -97,7 +97,7 @@ end;
 
 function TArrayDeque<T>.getItem(i: Integer): T;
 begin
-	Result := a[(j + i) mod Length(a)];
+  Result := a[(j + i) mod Length(a)];
 end;
 
 function TArrayDeque<T>.remove(i: Integer): T;
@@ -124,19 +124,19 @@ end;
 
 procedure TArrayDeque<T>.resize;
 begin
-	SetLength(a, max(1, 2*n));
+  SetLength(a, max(1, 2*n));
   j := 0;
 end;
 
 function TArrayDeque<T>.setItem(i: Integer; x: T): T;
 begin
-	Result := a[(j + i) mod Length(a)];
-	a[(j + i) mod Length(a)] := x;
+  Result := a[(j + i) mod Length(a)];
+  a[(j + i) mod Length(a)] := x;
 end;
 
 function TArrayDeque<T>.size: Integer;
 begin
-	Result := n;
+  Result := n;
 end;
 
 end.

@@ -75,19 +75,19 @@ var
   p: TNode;
   u: TNode;
 begin
-	p := findLast(x);
-	u := TNode.Create;
-	u.x := x;
+  p := findLast(x);
+  u := TNode.Create;
+  u.x := x;
 
-	Result := addChild(p, u);
+  Result := addChild(p, u);
 end;
 
 function TBinarySearchTree<T, TNode>.addNode(u: TNode): Boolean;
 var
   p: TNode;
 begin
-	p := findLast(u.x);
-	Result := addChild(p, u);
+  p := findLast(u.x);
+  Result := addChild(p, u);
 end;
 
 function TBinarySearchTree<T, TNode>.addChild(p, u: TNode): Boolean;
@@ -121,9 +121,9 @@ end;
 
 procedure TBinarySearchTree<T, TNode>.Clear;
 begin
-	inherited clear();
+  inherited clear();
 
-	n := 0;
+  n := 0;
 end;
 
 function TBinarySearchTree<T, TNode>.compare(A, B: T): Integer;
@@ -155,25 +155,25 @@ var
   z: TNode;
   comp: Integer;
 begin
-	w := r;
+  w := r;
   z := nil;
 
-	while w <> nil do
+  while w <> nil do
   begin
-		comp := compare(x, w.x);
-		if comp < 0 then
+    comp := compare(x, w.x);
+    if comp < 0 then
     begin
-			z := w;
-			w := TNode(w.left);
-		end
+      z := w;
+      w := TNode(w.left);
+    end
     else if comp > 0 then
     begin
-			w := TNode(w.right);
-		end
+      w := TNode(w.right);
+    end
     else begin
-			Exit(w.x);
-		end
-	end;
+      Exit(w.x);
+    end
+  end;
 
   if z = nil then
     Result := Default(T)
@@ -186,19 +186,19 @@ var
   w: TNode;
   comp: Integer;
 begin
-	w := r;
-	while w <> nil do
+  w := r;
+  while w <> nil do
   begin
-		comp := compare(x, w.x);
-		if comp < 0 then
-			w := TNode(w.left)
+    comp := compare(x, w.x);
+    if comp < 0 then
+      w := TNode(w.left)
     else if comp > 0 then
-			w := TNode(w.right)
-		else
-			Exit(w.x);
-	end;
+      w := TNode(w.right)
+    else
+      Exit(w.x);
+  end;
 
-	Result := Default(T);
+  Result := Default(T);
 end;
 
 function TBinarySearchTree<T, TNode>.findLast(x: T): TNode;
@@ -207,77 +207,77 @@ var
   prev: TNode;
   comp: Integer;
 begin
-	w := r;
+  w := r;
   prev := nil;
 
-	while w <> nil do
+  while w <> nil do
   begin
-		prev := w;
-		comp := compare(x, w.x);
-		if comp < 0 then
-			w := TNode(w.left)
-		else if comp > 0 then
-			w := TNode(w.right)
-		else
-			Exit(w);
-	end;
+    prev := w;
+    comp := compare(x, w.x);
+    if comp < 0 then
+      w := TNode(w.left)
+    else if comp > 0 then
+      w := TNode(w.right)
+    else
+      Exit(w);
+  end;
 
-	Result := prev;
+  Result := prev;
 end;
 
 function TBinarySearchTree<T, TNode>.remove(x: T): Boolean;
 var
   u: TNode;
 begin
-	u := findLast(x);
-	if (u <> nil) and (compare(x, u.x) = 0) then
+  u := findLast(x);
+  if (u <> nil) and (compare(x, u.x) = 0) then
   begin
-		remove(u);
-		Exit(True);
-	end;
-	Result := False;
+    remove(u);
+    Exit(True);
+  end;
+  Result := False;
 end;
 
 procedure TBinarySearchTree<T, TNode>.remove(u: TNode);
 var
   w: TNode;
 begin
-	if (u.left = nil) or (u.right = nil) then
+  if (u.left = nil) or (u.right = nil) then
   begin
-		splice(u);
-		u.Free;
-	end
+    splice(u);
+    u.Free;
+  end
   else
   begin
-		w := TNode(u.right);
-		while (w.left <> nil) do
-			w := TNode(w.left);
-		u.x := w.x;
-		splice(w);
-		w.Free;
-	end;
+    w := TNode(u.right);
+    while (w.left <> nil) do
+      w := TNode(w.left);
+    u.x := w.x;
+    splice(w);
+    w.Free;
+  end;
 end;
 
 procedure TBinarySearchTree<T, TNode>.rotateLeft(u: TNode);
 var
   w: TNode;
 begin
-	w := TNode(u.right);
-	w.parent := u.parent;
-	if w.parent <> nil then
+  w := TNode(u.right);
+  w.parent := u.parent;
+  if w.parent <> nil then
   begin
-		if TNode(w.parent.left) = u then
-			w.parent.left := w
-		else
-			w.parent.right := w;
-	end;
-	u.right := w.left;
-	if u.right <> nil then
-		u.right.parent := u;
+    if TNode(w.parent.left) = u then
+      w.parent.left := w
+    else
+      w.parent.right := w;
+  end;
+  u.right := w.left;
+  if u.right <> nil then
+    u.right.parent := u;
 
-	u.parent := w;
-	w.left := u;
-	if u = r then
+  u.parent := w;
+  w.left := u;
+  if u = r then
   begin
     r := w;
     r.parent := nil;
@@ -288,22 +288,22 @@ procedure TBinarySearchTree<T, TNode>.rotateRight(u: TNode);
 var
   w: TNode;
 begin
-	w := TNode(u.left);
-	w.parent := u.parent;
-	if w.parent <> nil then
+  w := TNode(u.left);
+  w.parent := u.parent;
+  if w.parent <> nil then
   begin
-		if TNode(w.parent.left) = u then
-			w.parent.left := w
-		else
-			w.parent.right := w;
-	end;
-	u.left := w.right;
-	if u.left <> nil then
-		u.left.parent := u;
+    if TNode(w.parent.left) = u then
+      w.parent.left := w
+    else
+      w.parent.right := w;
+  end;
+  u.left := w.right;
+  if u.left <> nil then
+    u.left.parent := u;
 
-	u.parent := w;
-	w.right := u;
-	if u = r then
+  u.parent := w;
+  w.right := u;
+  if u = r then
   begin
     r := w;
     r.parent := nil;
@@ -312,35 +312,35 @@ end;
 
 function TBinarySearchTree<T, TNode>.Size: Integer;
 begin
-	Result := n;
+  Result := n;
 end;
 
 procedure TBinarySearchTree<T, TNode>.splice(u: TNode);
 var
-	s, p: TNode;
+  s, p: TNode;
 begin
-	if u.left <> nil then
-		s := TNode(u.left)
-	else
-		s := TNode(u.right);
+  if u.left <> nil then
+    s := TNode(u.left)
+  else
+    s := TNode(u.right);
 
-	if u = r then
+  if u = r then
   begin
-		r := s;
-		p := nil;
-	end
+    r := s;
+    p := nil;
+  end
   else
   begin
-		p := TNode(u.parent);
-		if TNode(p.left) = u then
-			p.left := s
-		else
-			p.right := s;
-	end;
+    p := TNode(u.parent);
+    if TNode(p.left) = u then
+      p.left := s
+    else
+      p.right := s;
+  end;
 
-	if s <> nil then
-		s.parent := p;
-	Dec(n);
+  if s <> nil then
+    s.parent := p;
+  Dec(n);
 end;
 
 end.
