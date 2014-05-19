@@ -23,6 +23,7 @@ unit ods.BinarySearchTree;
 interface
 
 uses
+  System.Generics.Defaults,
   ods.BinaryTree;
 
 type
@@ -38,6 +39,7 @@ type
   TBinarySearchTree<T; TNode: TBSTNode<T>, constructor> = class(TBinaryTree<TNode>)
   protected
     n: Integer;
+    FComparer: IComparer<T>;
 
     function findLast(x: T): TNode; virtual;
     function addChild(p: TNode; u: TNode): Boolean; virtual;
@@ -49,7 +51,8 @@ type
 
     function compare(A, B: T): Integer; virtual;
   public
-    constructor Create;
+    constructor Create; overload;
+    constructor Create(AComparer: IComparer<T>); overload;
     destructor Destroy; override;
 
     function Add(x: T): Boolean; virtual;
@@ -125,14 +128,19 @@ end;
 
 function TBinarySearchTree<T, TNode>.compare(A, B: T): Integer;
 begin
-  raise EAbstractError.CreateFmt('compare is not implemented in %s', [ClassName]);
+  Result := FComparer.Compare(A, B);
+end;
+
+constructor TBinarySearchTree<T, TNode>.Create(AComparer: IComparer<T>);
+begin
+  FComparer := AComparer;
+
+  n := 0;
 end;
 
 constructor TBinarySearchTree<T, TNode>.Create;
 begin
-  inherited Create;
-
-  n := 0;
+  Create(TComparer<T>.Default);
 end;
 
 destructor TBinarySearchTree<T, TNode>.Destroy;
