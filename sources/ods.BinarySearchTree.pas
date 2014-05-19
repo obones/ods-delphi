@@ -47,7 +47,7 @@ type
     procedure rotateLeft(u: TNode); virtual;
     function addNode(u: TNode): Boolean; virtual;
 
-    function compare(A, B: T): Integer; virtual; abstract;
+    function compare(A, B: T): Integer; virtual;
   public
     constructor Create;
     destructor Destroy; override;
@@ -61,6 +61,9 @@ type
   end;
 
 implementation
+
+uses
+  System.SysUtils;
 
 { TBinarySearchTree<T, TNode> }
 
@@ -118,6 +121,11 @@ begin
 	inherited clear();
 
 	n := 0;
+end;
+
+function TBinarySearchTree<T, TNode>.compare(A, B: T): Integer;
+begin
+  raise EAbstractError.CreateFmt('compare is not implemented in %s', [ClassName]);
 end;
 
 constructor TBinarySearchTree<T, TNode>.Create;
