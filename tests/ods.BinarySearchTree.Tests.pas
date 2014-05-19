@@ -10,7 +10,7 @@
 { ANY KIND, either express or implied. See the License for the specific language governing rights  }
 { and limitations under the License.                                                               }
 {                                                                                                  }
-{ The Original Code is Registration.pas.                                                           }
+{ The Original Code is ods.BinarySearchTree.Tests.pas.                                             }
 {                                                                                                  }
 { The Initial Developer of the Original Code is Olivier Sannier (obones).                          }
 { All Rights Reserved.                                                                             }
@@ -18,24 +18,21 @@
 { Contributors:                                                                                    }
 {                                                                                                  }
 {**************************************************************************************************}
-unit Registration;
+unit ods.BinarySearchTree.Tests;
 
 interface
 
-implementation
-
 uses
-  TestFramework,
-  ods.BinaryTree.Tests,
-  ods.BinarySearchTree.Tests;
+  ods.BinarySearchTree, ods.BinaryTree.Tests;
 
-procedure RegisterTests;
-begin
-  RegisterTest(TBinaryTreeTest.Suite);
-  RegisterTest(TIntegerBinarySearchTreeTest.Suite);
-end;
+type
+  TBinarySearchTreeTest<T; N: TBSTNode<T>, constructor; TTree: TBinarySearchTree<T, N>, constructor> = class(TBinaryTreeTest<N, TTree>)
+  published
+  end;
 
-initialization
-  RegisterTests;
+  TIntegerBinarySearchTreeTest = class(TBinarySearchTreeTest<Integer, TBSTNode<Integer>, TBinarySearchTree<Integer, TBSTNode<Integer>>>)
+  end;
+
+implementation
 
 end.

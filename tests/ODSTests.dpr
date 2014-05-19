@@ -9,7 +9,9 @@ uses
   ods.BinaryTree.Tests in 'ods.BinaryTree.Tests.pas',
   ods.BinaryTree in '..\sources\ods.BinaryTree.pas',
   Registration in 'Registration.pas',
-  ods.ArrayDeque in '..\sources\ods.ArrayDeque.pas';
+  ods.ArrayDeque in '..\sources\ods.ArrayDeque.pas',
+  ods.BinarySearchTree in '..\sources\ods.BinarySearchTree.pas',
+  ods.BinarySearchTree.Tests in 'ods.BinarySearchTree.Tests.pas';
 
 {$R *.RES}
 
