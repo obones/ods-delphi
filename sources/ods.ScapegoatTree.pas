@@ -36,7 +36,7 @@ type
   protected
     q: Integer;
 
-    class function log32(q: Integer): Integer;
+    function log32(q: Integer): Integer; inline;
 
     function addWithDepth(u: TNode): Integer;
     procedure rebuild(u: TNode);
@@ -156,7 +156,7 @@ begin
 	Result := a[i + m];
 end;
 
-class function TScapegoatTree<T, TNode>.log32(q: Integer): Integer;
+function TScapegoatTree<T, TNode>.log32(q: Integer): Integer;
 begin
 	Result := Ceil(log23*Ln(q));
 end;
