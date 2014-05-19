@@ -35,11 +35,15 @@ uses
 
 procedure RegisterTests;
 begin
-  RegisterTest(TBinaryTreeTest.Suite);
-  RegisterTest(TIntegerBinarySearchTreeTest.Suite);
-  RegisterTest(TIntegerRedBlackTreeTest.Suite);
-  RegisterTest(TIntegerTreapTest.Suite);
-  RegisterTest(TIntegerScapegoatTreeTest.Suite);
+  RegisterTest(TTestSuite.Create('Trees',
+    [
+      TBinaryTreeTest.Suite,
+      TIntegerBinarySearchTreeTest.Suite,
+      TIntegerRedBlackTreeTest.Suite,
+      TIntegerTreapTest.Suite,
+      TIntegerScapegoatTreeTest.Suite
+    ]));
+
   RegisterTest(TTestSuite.Create('Performances', [TTreesPerformanceTest.Suite]));
 end;
 
