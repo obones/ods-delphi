@@ -15,7 +15,9 @@ uses
   ods.RedBlackTree in '..\sources\ods.RedBlackTree.pas',
   ods.RedBlackTree.Tests in 'ods.RedBlackTree.Tests.pas',
   ods.Treap.Tests in 'ods.Treap.Tests.pas',
-  ods.Treap in '..\sources\ods.Treap.pas';
+  ods.Treap in '..\sources\ods.Treap.pas',
+  ods.ScapegoatTree.Tests in 'ods.ScapegoatTree.Tests.pas',
+  ods.ScapegoatTree in '..\sources\ods.ScapegoatTree.pas';
 
 {$R *.RES}
 

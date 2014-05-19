@@ -113,6 +113,8 @@
 			<DCCReference Include="ods.RedBlackTree.Tests.pas"/>
 			<DCCReference Include="ods.Treap.Tests.pas"/>
 			<DCCReference Include="..\sources\ods.Treap.pas"/>
+			<DCCReference Include="ods.ScapegoatTree.Tests.pas"/>
+			<DCCReference Include="..\sources\ods.ScapegoatTree.pas"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
@@ -178,6 +180,8 @@
 				<UnitTesting>
 					<TestFramework>DUnit / Delphi Win32</TestFramework>
 					<TestRunner>GUI</TestRunner>
+					<TestProjectName/>
+					<SourceProjectName/>
 				</UnitTesting>
 			</BorlandProject>
 			<ProjectFileVersion>12</ProjectFileVersion>

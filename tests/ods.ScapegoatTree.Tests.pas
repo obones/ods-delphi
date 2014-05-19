@@ -10,7 +10,7 @@
 { ANY KIND, either express or implied. See the License for the specific language governing rights  }
 { and limitations under the License.                                                               }
 {                                                                                                  }
-{ The Original Code is Registration.pas.                                                           }
+{ The Original Code is ods.ScapegoatTree.Tests.pas.                                                }
 {                                                                                                  }
 { The Initial Developer of the Original Code is Olivier Sannier (obones).                          }
 { All Rights Reserved.                                                                             }
@@ -18,30 +18,39 @@
 { Contributors:                                                                                    }
 {                                                                                                  }
 {**************************************************************************************************}
-unit Registration;
+unit ods.ScapegoatTree.Tests;
 
 interface
 
+uses
+  ods.BinarySearchTree.Tests, ods.ScapegoatTree;
+
+type
+  TScapegoatTreeTest<T; N: TScapegoatNode<T>, constructor; TTree: TScapegoatTree<T, N>, constructor> = class(TBinarySearchTreeTest<T, N, TTree>)
+  end;
+
+  TIntegerScapegoatTreeTest = class(TBinarySearchTreeTest<Integer, TScapegoatNode<Integer>, TScapegoatTree<Integer, TScapegoatNode<Integer>>>)
+  protected
+    function GetAddValue: Integer; override;
+    procedure DoTestAddChecks(Value: Integer); override;
+  end;
+
 implementation
 
-uses
-  TestFramework,
-  ods.BinaryTree.Tests,
-  ods.BinarySearchTree.Tests,
-  ods.RedBlackTree.Tests,
-  ods.Treap.Tests,
-  ods.ScapegoatTree.Tests;
+{ TIntegerScapegoatTreeTest }
 
-procedure RegisterTests;
+procedure TIntegerScapegoatTreeTest.DoTestAddChecks(Value: Integer);
 begin
-  RegisterTest(TBinaryTreeTest.Suite);
-  RegisterTest(TIntegerBinarySearchTreeTest.Suite);
-  RegisterTest(TIntegerRedBlackTreeTest.Suite);
-  RegisterTest(TIntegerTreapTest.Suite);
-  RegisterTest(TIntegerScapegoatTreeTest.Suite);
+  inherited DoTestAddChecks(Value);
+
+  CheckEquals(89, FTree.Find(Value), 'Value should be there');
 end;
 
-initialization
-  RegisterTests;
+function TIntegerScapegoatTreeTest.GetAddValue: Integer;
+begin
+  Result := 89;
+end;
 
 end.
+
+
