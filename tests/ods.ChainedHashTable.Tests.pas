@@ -10,7 +10,7 @@
 { ANY KIND, either express or implied. See the License for the specific language governing rights  }
 { and limitations under the License.                                                               }
 {                                                                                                  }
-{ The Original Code is ods.ChainedHashTable.Tests.pas.                                                         }
+{ The Original Code is ods.ChainedHashTable.Tests.pas.                                             }
 {                                                                                                  }
 { The Initial Developer of the Original Code is Olivier Sannier (obones).                          }
 { All Rights Reserved.                                                                             }

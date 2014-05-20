@@ -65,13 +65,13 @@ uses
 
 function TChainedHashTable<T>.Add(x: T): Boolean;
 begin
-	if Equals(find(x), x) then
+  if Equals(find(x), x) then
     Exit(false);
-	if n+1 > Length(table) then
+  if n+1 > Length(table) then
     resize();
-	table[hash(x)].add(x);
-	Inc(n);
-	Result := true;
+  table[hash(x)].add(x);
+  Inc(n);
+  Result := true;
 end;
 
 procedure TChainedHashTable<T>.allocTable(m: Integer);
@@ -81,9 +81,9 @@ end;
 
 procedure TChainedHashTable<T>.Clear;
 begin
-	n := 0;
-	d := 1;
-	SetLength(table, 2);
+  n := 0;
+  d := 1;
+  SetLength(table, 2);
 end;
 
 constructor TChainedHashTable<T>.Create(AComparer: IComparer<T>);
@@ -93,7 +93,7 @@ begin
   FComparer := AComparer;
 
   Clear;
-	z := random(MaxInt) or 1;     // is a random odd integer
+  z := random(MaxInt) or 1;     // is a random odd integer
 end;
 
 function TChainedHashTable<T>.Equals(Left, Right: T): Boolean;
@@ -111,17 +111,17 @@ var
   j: Integer;
   i: Integer;
 begin
-	j := hash(x);
-	for i := 0 to table[j].size() - 1 do
-		if Equals(x, table[j].getItem(i)) then
-			Exit(table[j].getItem(i));
-	Result := Default(T);
+  j := hash(x);
+  for i := 0 to table[j].size() - 1 do
+    if Equals(x, table[j].getItem(i)) then
+      Exit(table[j].getItem(i));
+  Result := Default(T);
 end;
 
 function TChainedHashTable<T>.hash(x: T): Integer;
 begin
   {$MESSAGE WARN 'Todo'}
-//	Result := (Cardinal(z * hashCode(x))) shr (w-d);
+//  Result := (Cardinal(z * hashCode(x))) shr (w-d);
 end;
 
 function TChainedHashTable<T>.Remove(x: T): T;
@@ -129,18 +129,18 @@ var
   j: Integer;
   i: Integer;
 begin
-	j := hash(x);
-	for i := 0 to table[j].size() - 1 do
+  j := hash(x);
+  for i := 0 to table[j].size() - 1 do
   begin
-		Result := table[j].getItem(i);
-		if Equals(x, Result) then
+    Result := table[j].getItem(i);
+    if Equals(x, Result) then
     begin
-			table[j].remove(i);
-			Dec(n);
-			Exit;
-		end;
-	end;
-	Result := Default(T);
+      table[j].remove(i);
+      Dec(n);
+      Exit;
+    end;
+  end;
+  Result := Default(T);
 end;
 
 procedure TChainedHashTable<T>.resize;
@@ -150,22 +150,22 @@ var
   j: Integer;
   x: T;
 begin
-	d := 1;
-	while 1 shl d <= n do
+  d := 1;
+  while 1 shl d <= n do
     Inc(d);
 
   n := 0;
 
-	SetLength(newTable, 1 shl d);
-	for i := 0 to Length(table) - 1 do
+  SetLength(newTable, 1 shl d);
+  for i := 0 to Length(table) - 1 do
   begin
-		for j := 0 to table[i].size() - 1 do
+    for j := 0 to table[i].size() - 1 do
     begin
-			x := table[i].getItem(j);
-			newTable[hash(x)].add(x);
-		end;
-	end;
-	table := newTable;
+      x := table[i].getItem(j);
+      newTable[hash(x)].add(x);
+    end;
+  end;
+  table := newTable;
 end;
 
 function TChainedHashTable<T>.Size: Integer;
