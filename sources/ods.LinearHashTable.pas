@@ -54,7 +54,7 @@ type
     function hashCode(x: T): Cardinal; virtual;
   public
     // FIXME: get rid of default constructor
-    constructor DontCreate; overload;
+    constructor Create; overload;
     constructor Create(null: T; del: T); overload;
     constructor Create(null: T; del: T; AComparer: IComparer<T>); overload;
     function add(x: T): Boolean;
@@ -284,18 +284,9 @@ begin
   Create(null, del, TComparer<T>.Default);
 end;
 
-constructor TLinearHashTable<T>.DontCreate;
+constructor TLinearHashTable<T>.Create;
 begin
-(**
- * FIXME: Dangerous - leaves null and del uninitialized
- *)
-(*
-  Self.null := null;
-  Self.del := del;
-*)
-  n := 0;
-  q := 0;
-  d := 1;
+  raise ENotSupportedException.CreateFmt('Parameterless constructor is not supported on %s', [ClassName]);
 end;
 
 procedure TLinearHashTable<T>.FillWithNull(var ATable: TArray<T>);
