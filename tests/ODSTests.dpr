@@ -21,7 +21,9 @@ uses
   PerformanceTests in 'PerformanceTests.pas',
   ods.ArrayStack in '..\sources\ods.ArrayStack.pas',
   ods.ChainedHashTable.Tests in 'ods.ChainedHashTable.Tests.pas',
-  ods.ChainedHashTable in '..\sources\ods.ChainedHashTable.pas';
+  ods.ChainedHashTable in '..\sources\ods.ChainedHashTable.pas',
+  ods.LinearHashTable.Tests in 'ods.LinearHashTable.Tests.pas',
+  ods.LinearHashTable in '..\sources\ods.LinearHashTable.pas';
 
 {$R *.RES}
 
