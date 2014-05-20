@@ -10,7 +10,7 @@
 { ANY KIND, either express or implied. See the License for the specific language governing rights  }
 { and limitations under the License.                                                               }
 {                                                                                                  }
-{ The Original Code is ods.RedBlackTree.Tests.pas.                                                 }
+{ The Original Code is ods.Base.Tests.pas.                                                         }
 {                                                                                                  }
 { The Initial Developer of the Original Code is Olivier Sannier (obones).                          }
 { All Rights Reserved.                                                                             }
@@ -18,37 +18,46 @@
 { Contributors:                                                                                    }
 {                                                                                                  }
 {**************************************************************************************************}
-unit ods.RedBlackTree.Tests;
+unit ods.Base.Tests;
 
 interface
 
 uses
-  ods.BinarySearchTree.Tests, ods.RedBlackTree;
+  TestFramework,
+  ods.BinaryTree;
 
 type
-  TRedBlackTreeTest<T; N: TRedBlackNode<T>, constructor; TTree: TRedBlackTree<T, N>, constructor> = class(TBinarySearchTreeTest<T, N, TTree>)
-  end;
-
-  TIntegerRedBlackTreeTest = class(TBinarySearchTreeTest<Integer, TRedBlackNode<Integer>, TRedBlackTree<Integer, TRedBlackNode<Integer>>>)
+  TBaseTest<T: class, constructor> = class(TTestCase)
+  private
+    FObject: T;
   protected
-    function GetAddValue: Integer; override;
-    procedure DoTestAddChecks(Value: Integer); override;
+    function GetNewObject: T; virtual;
+  public
+    procedure SetUp; override;
+    procedure TearDown; override;
   end;
 
 implementation
 
-{ TIntegerRedBlackTreeTest }
+{ TBaseTest<T> }
 
-procedure TIntegerRedBlackTreeTest.DoTestAddChecks(Value: Integer);
+function TBaseTest<T>.GetNewObject: T;
 begin
-  inherited DoTestAddChecks(Value);
-
-  CheckEquals(57, FObject.Find(Value), 'Value should be there');
+  Result := T.Create;
 end;
 
-function TIntegerRedBlackTreeTest.GetAddValue: Integer;
+procedure TBaseTest<T>.SetUp;
 begin
-  Result := 57;
+  inherited SetUp;
+
+  FObject := GetNewObject;
+end;
+
+procedure TBaseTest<T>.TearDown;
+begin
+  FObject.Free;
+
+  inherited TearDown;
 end;
 
 end.

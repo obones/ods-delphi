@@ -49,7 +49,7 @@ uses
 
 procedure TBinarySearchTreeTest<T, N, TTree>.DoTestAddChecks(Value: T);
 begin
-  CheckEquals(1, FTree.Size, 'Size should increase once add done');
+  CheckEquals(1, FObject.Size, 'Size should increase once add done');
 end;
 
 function TBinarySearchTreeTest<T, N, TTree>.GetAddValue: T;
@@ -63,7 +63,7 @@ var
 begin
   Value := GetAddValue;
 
-  FTree.Add(Value);
+  FObject.Add(Value);
 
   DoTestAddChecks(Value);
 end;
@@ -74,7 +74,7 @@ procedure TIntegerBinarySearchTreeTest.DoTestAddChecks(Value: Integer);
 begin
   inherited DoTestAddChecks(Value);
 
-  CheckEquals(45, FTree.Find(Value), 'Value should be there');
+  CheckEquals(45, FObject.Find(Value), 'Value should be there');
 end;
 
 function TIntegerBinarySearchTreeTest.GetAddValue: Integer;

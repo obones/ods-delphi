@@ -23,18 +23,11 @@ unit ods.BinaryTree.Tests;
 interface
 
 uses
-  TestFramework,
+  ods.Base.Tests,
   ods.BinaryTree;
 
 type
-  TBinaryTreeTest<N: TBTNode; T: TBinaryTree<N>, constructor> = class(TTestCase)
-  private
-    FTree: T;
-  protected
-    function GetNewObject: T; virtual;
-  public
-    procedure SetUp; override;
-    procedure TearDown; override;
+  TBinaryTreeTest<N: TBTNode; T: TBinaryTree<N>, constructor> = class(TBaseTest<T>)
   published
     procedure TestSize;
   end;
@@ -46,28 +39,9 @@ implementation
 
 { TBinaryTreeTest<N, T> }
 
-function TBinaryTreeTest<N, T>.GetNewObject: T;
-begin
-  Result := T.Create;
-end;
-
-procedure TBinaryTreeTest<N, T>.SetUp;
-begin
-  inherited SetUp;
-
-  FTree := GetNewObject;
-end;
-
-procedure TBinaryTreeTest<N, T>.TearDown;
-begin
-  FTree.Free;
-
-  inherited TearDown;
-end;
-
 procedure TBinaryTreeTest<N, T>.TestSize;
 begin
-  CheckEquals(0, FTree.Size, 'Size should be 0 at first');
+  CheckEquals(0, FObject.Size, 'Size should be 0 at first');
 end;
 
 end.

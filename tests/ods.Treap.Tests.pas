@@ -43,7 +43,7 @@ procedure TIntegerTreapTest.DoTestAddChecks(Value: Integer);
 begin
   inherited DoTestAddChecks(Value);
 
-  CheckEquals(74, FTree.Find(Value), 'Value should be there');
+  CheckEquals(74, FObject.Find(Value), 'Value should be there');
 end;
 
 function TIntegerTreapTest.GetAddValue: Integer;

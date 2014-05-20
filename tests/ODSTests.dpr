@@ -23,7 +23,8 @@ uses
   ods.ChainedHashTable.Tests in 'ods.ChainedHashTable.Tests.pas',
   ods.ChainedHashTable in '..\sources\ods.ChainedHashTable.pas',
   ods.LinearHashTable.Tests in 'ods.LinearHashTable.Tests.pas',
-  ods.LinearHashTable in '..\sources\ods.LinearHashTable.pas';
+  ods.LinearHashTable in '..\sources\ods.LinearHashTable.pas',
+  ods.Base.Tests in 'ods.Base.Tests.pas';
 
 {$R *.RES}
 

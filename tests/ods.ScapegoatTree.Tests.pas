@@ -43,7 +43,7 @@ procedure TIntegerScapegoatTreeTest.DoTestAddChecks(Value: Integer);
 begin
   inherited DoTestAddChecks(Value);
 
-  CheckEquals(89, FTree.Find(Value), 'Value should be there');
+  CheckEquals(89, FObject.Find(Value), 'Value should be there');
 end;
 
 function TIntegerScapegoatTreeTest.GetAddValue: Integer;
