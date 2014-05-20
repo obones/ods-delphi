@@ -18,7 +18,8 @@ uses
   ods.Treap in '..\sources\ods.Treap.pas',
   ods.ScapegoatTree.Tests in 'ods.ScapegoatTree.Tests.pas',
   ods.ScapegoatTree in '..\sources\ods.ScapegoatTree.pas',
-  PerformanceTests in 'PerformanceTests.pas';
+  PerformanceTests in 'PerformanceTests.pas',
+  ods.ArrayStack in '..\sources\ods.ArrayStack.pas';
 
 {$R *.RES}
 
