@@ -22,6 +22,65 @@ unit ods.ChainedHashTable.Tests;
 
 interface
 
+uses
+  ods.Base.Tests,
+  ods.ChainedHashTable;
+
+type
+  TChainedHashTableTest<T; Table: TChainedHashTable<T>, constructor> = class(TBaseTest<Table>)
+  protected
+    function GetAddValue: T; virtual; abstract;
+    procedure DoTestAddChecks; virtual;
+  published
+    procedure TestAdd;
+  end;
+
+  TIntegerChainedHashTable = class(TChainedHashTable<Integer>)
+  protected
+    function hashCode(x: Integer): Cardinal; override;
+  end;
+
+  TIntegerChainedHashTableTest = class(TChainedHashTableTest<Integer, TIntegerChainedHashTable>)
+  protected
+    function GetAddValue: Integer; override;
+    procedure DoTestAddChecks; override;
+  end;
+
 implementation
+
+{ TChainedHashTableTest<T, Table> }
+
+procedure TChainedHashTableTest<T, Table>.DoTestAddChecks;
+begin
+  CheckEquals(1, FObject.Size, 'Size');
+end;
+
+procedure TChainedHashTableTest<T, Table>.TestAdd;
+begin
+  FObject.Add(GetAddValue);
+
+  DoTestAddChecks;
+end;
+
+{ TIntegerChainedHashTableTest }
+
+procedure TIntegerChainedHashTableTest.DoTestAddChecks;
+begin
+  inherited DoTestAddChecks;
+
+  CheckEquals(45, FObject.Find(45), 'Find');
+end;
+
+function TIntegerChainedHashTableTest.GetAddValue: Integer;
+begin
+  Result := 45;
+end;
+
+{ TIntegerChainedHashTable }
+
+function TIntegerChainedHashTable.hashCode(x: Integer): Cardinal;
+begin
+  Result := Cardinal(x);
+end;
 
 end.

@@ -31,6 +31,8 @@ uses
   ods.RedBlackTree.Tests,
   ods.Treap.Tests,
   ods.ScapegoatTree.Tests,
+  ods.ChainedHashTable.Tests,
+  ods.LinearHashTable.Tests,
   PerformanceTests;
 
 procedure RegisterTests;
@@ -42,6 +44,12 @@ begin
       TIntegerRedBlackTreeTest.Suite,
       TIntegerTreapTest.Suite,
       TIntegerScapegoatTreeTest.Suite
+    ]));
+
+  RegisterTest(TTestSuite.Create('Hashes',
+    [
+      TIntegerChainedHashTableTest.Suite,
+      TIntegerLinearHashTableTest.Suite
     ]));
 
   RegisterTest(TTestSuite.Create('Performances', [TTreesPerformanceTest.Suite]));
