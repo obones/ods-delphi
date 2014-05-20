@@ -44,7 +44,7 @@ type
     procedure resize();
     function hash(x: T): Integer; inline;
 
-    function Equals(Left, Right: T): Boolean; reintroduce; inline;
+    function SameValue(Left, Right: T): Boolean; inline;
   public
     constructor Create; overload;
     constructor Create(AComparer: IComparer<T>); overload;
@@ -65,7 +65,7 @@ uses
 
 function TChainedHashTable<T>.Add(x: T): Boolean;
 begin
-  if Equals(find(x), x) then
+  if SameValue(find(x), x) then
     Exit(false);
   if n+1 > Length(table) then
     resize();
@@ -96,7 +96,7 @@ begin
   z := random(MaxInt) or 1;     // is a random odd integer
 end;
 
-function TChainedHashTable<T>.Equals(Left, Right: T): Boolean;
+function TChainedHashTable<T>.SameValue(Left, Right: T): Boolean;
 begin
   Result := FComparer.Compare(Left, Right) = 0;
 end;
@@ -113,7 +113,7 @@ var
 begin
   j := hash(x);
   for i := 0 to table[j].size() - 1 do
-    if Equals(x, table[j].getItem(i)) then
+    if SameValue(x, table[j].getItem(i)) then
       Exit(table[j].getItem(i));
   Result := Default(T);
 end;
@@ -133,7 +133,7 @@ begin
   for i := 0 to table[j].size() - 1 do
   begin
     Result := table[j].getItem(i);
-    if Equals(x, Result) then
+    if SameValue(x, Result) then
     begin
       table[j].remove(i);
       Dec(n);
