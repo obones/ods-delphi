@@ -23,7 +23,7 @@ unit ods.ChainedHashTable;
 interface
 
 uses
-  System.Generics.Defaults,
+  System.Generics.Collections, System.Generics.Defaults,
   ods.ArrayStack;
 
 type
@@ -33,7 +33,7 @@ type
   protected
     type TList = TArrayStack<T>;
   protected
-    table: TArray<TList>;
+    table: TObjectList<TList>;
     n: Integer;
     d: Integer;
     z: Integer;
@@ -49,6 +49,7 @@ type
   public
     constructor Create; overload;
     constructor Create(AComparer: IComparer<T>); overload;
+    destructor Destroy; override;
 
     function Add(x: T): Boolean;
     function Remove(x: T): T;
@@ -68,7 +69,7 @@ function TChainedHashTable<T>.Add(x: T): Boolean;
 begin
   if SameValue(find(x), x) then
     Exit(false);
-  if n+1 > Length(table) then
+  if n+1 > table.Count then
     resize();
   table[hash(x)].add(x);
   Inc(n);
@@ -84,7 +85,9 @@ procedure TChainedHashTable<T>.Clear;
 begin
   n := 0;
   d := 1;
-  SetLength(table, 2);
+  table.Clear;
+  table.Add(TList.Create);
+  table.Add(TList.Create);
 end;
 
 constructor TChainedHashTable<T>.Create(AComparer: IComparer<T>);
@@ -92,9 +95,17 @@ begin
   inherited Create;
 
   FComparer := AComparer;
+  table := TObjectList<TList>.Create;
 
   Clear;
   z := random(MaxInt) or 1;     // is a random odd integer
+end;
+
+destructor TChainedHashTable<T>.Destroy;
+begin
+  table.Free;
+
+  inherited Destroy;
 end;
 
 function TChainedHashTable<T>.SameValue(Left, Right: T): Boolean;
@@ -151,7 +162,7 @@ end;
 
 procedure TChainedHashTable<T>.resize;
 var
-  newTable: TArray<TList>;
+  newTable: TObjectList<TList>;
   i: Integer;
   j: Integer;
   x: T;
@@ -162,8 +173,12 @@ begin
 
   n := 0;
 
-  SetLength(newTable, 1 shl d);
-  for i := 0 to Length(table) - 1 do
+  newTable := TObjectList<TList>.Create(True);
+  newTable.Capacity := 1 shl d;
+  for i := 0 to newTable.Capacity - 1 do
+    newTable.Add(TList.Create);
+
+  for i := 0 to table.Count - 1 do
   begin
     for j := 0 to table[i].size() - 1 do
     begin
@@ -171,6 +186,8 @@ begin
       newTable[hash(x)].add(x);
     end;
   end;
+
+  table.Free;
   table := newTable;
 end;
 
