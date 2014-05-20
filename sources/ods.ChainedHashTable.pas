@@ -121,6 +121,7 @@ end;
 
 function TChainedHashTable<T>.hash(x: T): Integer;
 begin
+  {$OVERFLOWCHECKS OFF}
   Result := (Cardinal(z) * hashCode(x)) shr (w-d);
 end;
 
