@@ -45,6 +45,7 @@ type
     function hash(x: T): Integer; inline;
 
     function SameValue(Left, Right: T): Boolean; inline;
+    function hashCode(x: T): Cardinal; virtual;
   public
     constructor Create; overload;
     constructor Create(AComparer: IComparer<T>); overload;
@@ -120,8 +121,12 @@ end;
 
 function TChainedHashTable<T>.hash(x: T): Integer;
 begin
-  {$MESSAGE WARN 'Todo'}
-//  Result := (Cardinal(z * hashCode(x))) shr (w-d);
+  Result := (Cardinal(z) * hashCode(x)) shr (w-d);
+end;
+
+function TChainedHashTable<T>.hashCode(x: T): Cardinal;
+begin
+  raise EAbstractError.CreateFmt('hashCode is not implemented in %s', [ClassName]);
 end;
 
 function TChainedHashTable<T>.Remove(x: T): T;

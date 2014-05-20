@@ -50,6 +50,8 @@ type
       return tab[hashCode(x) >> w-d];
     }
     *)
+  protected
+    function hashCode(x: T): Cardinal; virtual;
   public
     // FIXME: get rid of default constructor
     constructor DontCreate; overload;
@@ -209,6 +211,9 @@ const
 
 implementation
 
+uses
+  System.SysUtils;
+
 { TLinearHashTable<T> }
 
 function TLinearHashTable<T>.add(x: T): Boolean;
@@ -322,13 +327,17 @@ function TLinearHashTable<T>.hash(x: T): Integer;
 var
   h: Cardinal;
 begin
-  {$MESSAGE WARN 'Todo'}
-//  h := hashCode(x);
+  h := hashCode(x);
   Result := (tab[0][h and $ff]
            xor tab[1][(h shr 8) and $ff]
            xor tab[2][(h shr 16) and $ff]
            xor tab[3][(h shr 24) and $ff])
           shr (w-d);
+end;
+
+function TLinearHashTable<T>.hashCode(x: T): Cardinal;
+begin
+  raise EAbstractError.CreateFmt('hashCode is not implemented in %s', [ClassName]);
 end;
 
 function TLinearHashTable<T>.remove(x: T): T;
