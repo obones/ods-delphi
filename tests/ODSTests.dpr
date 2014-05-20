@@ -19,7 +19,9 @@ uses
   ods.ScapegoatTree.Tests in 'ods.ScapegoatTree.Tests.pas',
   ods.ScapegoatTree in '..\sources\ods.ScapegoatTree.pas',
   PerformanceTests in 'PerformanceTests.pas',
-  ods.ArrayStack in '..\sources\ods.ArrayStack.pas';
+  ods.ArrayStack in '..\sources\ods.ArrayStack.pas',
+  ods.ChainedHashTable.Tests in 'ods.ChainedHashTable.Tests.pas',
+  ods.ChainedHashTable in '..\sources\ods.ChainedHashTable.pas';
 
 {$R *.RES}
 
